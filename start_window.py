@@ -51,13 +51,28 @@ class Window(Frame):
                 self.authenticate(bank)
 
     def authenticate(self, bank):
+        def test():
+            print('bbad    ', username_box.get())
+            print('aabc    ', password_box.get())
+
         new_window=Toplevel()
+        new_window.geometry('600x300')
         new_window.title('Authentication')
 
-        msg=Message(new_window, text='Please enter your username and password for %s'%bank)
+        msg=Message(new_window, text='Please enter your username and password for %s'%bank, width=300)
         msg.pack()
 
-        btn=Button(new_window, text="hello")
-        btn.pack()
+        uLabel=Label(new_window, text='username')
+        uLabel.place(x=50, y=100)
+        username_box = Entry(new_window, width=30)
+        username_box.place(x=200, y=100)
+
+        pLabel=Label(new_window, text='password')
+        pLabel.place(x=50, y=170)
+        password_box = Entry(new_window, width=30, show="*")
+        password_box.place(x=200, y=170)
+
+        btn=Button(new_window, text="log in", command=test)
+        btn.place(x=270, y=260)
 
 
