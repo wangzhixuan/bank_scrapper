@@ -4,9 +4,13 @@ by Zhixuan Wang
 """
 
 from tkinter import *
+import banks
 
 bank_choices = {'Chase', 'Wells Fargo', 'Bank of America', 'American Express', 'Discover'}
 
+bank_urls = {
+    'Wells Fargo': 'www.wellsfargo.com',
+}
 
 
 class Window(Frame):
@@ -48,12 +52,15 @@ class Window(Frame):
         for bank in self.bank_choices_checkbox:
             if self.bank_choices_checkbox[bank].get() == 1:
                 print(bank)
-                self.authenticate(bank)
+                self.authenticate_window(bank)
 
-    def authenticate(self, bank):
-        def test():
-            print('bbad    ', username_box.get())
-            print('aabc    ', password_box.get())
+    def authenticate_window(self, bank):
+
+        def get_transactions():
+            username = username_box.get()
+            password = password_box.get()
+
+            this_bank = banks.Banks['Wells Fargo'](username, password)
 
         new_window=Toplevel()
         new_window.geometry('600x300')
@@ -72,7 +79,8 @@ class Window(Frame):
         password_box = Entry(new_window, width=30, show="*")
         password_box.place(x=200, y=170)
 
-        btn=Button(new_window, text="log in", command=test)
+        btn=Button(new_window, text="log in", command=get_transactions)
         btn.place(x=270, y=260)
+
 
 
